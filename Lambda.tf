@@ -1,61 +1,64 @@
 # IAM role creation for Lambda function
-resource "aws_iam_role" "iam_for_lambda" {
-  name = "lambda_role"
-
-  assume_role_policy = <<EOF
-{
+resource "aws_iam_role_policy" "lambda_policy" {
+  name  = "lambda_role_policy"
+  role  = aws_iam_role.iam_for_lambda.id
+  policy = <<-EOF
+  {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "Stmt1584280434313",
+      "Sid": "Stmt1584631650584",
       "Action": "lambda:*",
       "Effect": "Allow",
       "Resource": "*"
     },
     {
-      "Sid": "Stmt1584280538356",
+      "Sid": "Stmt1584631713629",
       "Action": "cloudwatch:*",
       "Effect": "Allow",
       "Resource": "*"
     },
     {
-      "Sid": "Stmt1584280644201",
-      "Action": [
-        "rds:DescribeDBInstances",
-        "rds:ModifyDBInstance"
-      ],
+      "Sid": "Stmt1584631730371",
+      "Action": "dynamodb:*",
       "Effect": "Allow",
       "Resource": "*"
     },
     {
-      "Sid": "Stmt1584280722146",
-      "Action": [
-        "dynamodb:BatchGetItem",
-        "dynamodb:BatchWriteItem",
-        "dynamodb:CreateTable",
-        "dynamodb:GetItem",
-        "dynamodb:GetRecords",
-        "dynamodb:ListTables",
-        "dynamodb:PutItem",
-        "dynamodb:Query",
-        "dynamodb:Scan",
-        "dynamodb:UpdateItem",
-        "dynamodb:UpdateTable"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    },
-    {
-      "Sid": "Stmt1584280750344",
-      "Action": "logs:*",
+      "Sid": "Stmt1584631751806",
+      "Action": "rds:*",
       "Effect": "Allow",
       "Resource": "*"
     }
-  ]
-}
-EOF
+   ]
+  }
+ EOF
 }
 
+
+resource "aws_iam_role" "iam_for_lambda" {
+  name = "lambda_role"
+  assume_role_policy = <<-EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Action": "sts:AssumeRole",
+        "Principal": {
+          "Service": [
+		"lambda.amazonaws.com",
+		"dynamodb.amazonaws.com",
+		"cloudwatch.amazonaws.com",
+		"rds.amazonaws.com"
+	   ]
+        },
+        "Effect": "Allow",
+        "Sid": ""
+      }
+    ]
+  }
+  EOF
+}
 #AWS 1st Lambda function creation
 resource "aws_lambda_function" "project" {
     function_name = "project_syncron"
@@ -73,9 +76,9 @@ resource "aws_cloudwatch_event_rule" "trigger_lambda" {
 }
 
 resource "aws_cloudwatch_event_target" "run_lambda_five_minutes"{
-  rule = aws_cloudwatch_event_rule.trigger_lambda.name
+  rule = aws_cloudwatch_event_rule.trigger_lambda.id
   target_id = "lambda"
-  arn = "aws_lambda_function.project.arn"
+  arn = aws_lambda_function.project.arn
 }
 
 
