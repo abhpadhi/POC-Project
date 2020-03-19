@@ -62,10 +62,10 @@ resource "aws_iam_role" "iam_for_lambda" {
 #AWS 1st Lambda function creation
 resource "aws_lambda_function" "project" {
     function_name = "project_syncron"
-    filename      = "code_for_lambda_function.zip"
+    filename      = "lambda_handler.zip"
     role          = aws_iam_role.iam_for_lambda.arn
-    #handler       = "lambda_handler"
-    source_code_hash = filebase64sha256("code_for_lambda_function.zip")  
+    handler       = "lambda_handler"
+    source_code_hash = filebase64sha256("lambda_handler.zip")  
     runtime = "python3.7" 
 }
 
@@ -85,9 +85,9 @@ resource "aws_cloudwatch_event_target" "run_lambda_five_minutes"{
 #AWS 2nd Lambda Creation 
 resource "aws_lambda_function" "project-API" {
     function_name = "project_syncron-API"
-    filename      = "code_for_second_lambda_function.zip"
+    filename      = "lambda-api/lambda_handler.zip"
     role          = aws_iam_role.iam_for_lambda.arn
     handler       = "lambda_handler"
-    source_code_hash = filebase64sha256("code_for_second_lambda_function.zip")  
+    source_code_hash = filebase64sha256("lambda-api/lambda_handler.zip")  
     runtime = "python3.7" 
 }
