@@ -6,10 +6,10 @@ import datetime
 
 def lambda_handler(event, context):
     dynamodb = boto3.resource('dynamodb')
-    dynamodb_table = dynamodb.Table('Db_details')
+    dynamodb_table = dynamodb.Table('rds_data_table')
     rds_client = boto3.client('rds',region_name='us-east-1')
     db_instances = rds_client.describe_db_instances()
-    db_len = len(db_instances)-1
+    db_len = len(db_instances)
     print(db_len)
     try:
         for i in range(0,db_len):
@@ -17,8 +17,8 @@ def lambda_handler(event, context):
             db_type = db_instances['DBInstances'][i]['DBInstanceClass']
             dynamodb_table.put_item(
                 Item={
-                    'endpoint': db_endpoint,
-                    'type': db_type
+                    'DB_endpoint': db_endpoint,
+                    'DB_type': db_type
                 }
            )
 

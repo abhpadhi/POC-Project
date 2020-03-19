@@ -18,9 +18,9 @@ resource "aws_api_gateway_method" "getmethod" {
   resource_id   = aws_api_gateway_resource.api_resource.id
   http_method   = "GET"
   authorization = "NONE"
-  request_parameters = { 
-	"integration.request.querystring.InstanceType" = true
-  }
+  #request_parameters = { 
+	#"integration.request.querystring.InstanceType" = true
+  #}
 }
 
 #resource "aws_api_gateway_method" "gateway_method" {
