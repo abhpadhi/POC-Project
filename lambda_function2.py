@@ -1,3 +1,4 @@
+##Lambda function to fetch RDS details back to API endpoint based on USER inputs
 import boto3 
 from boto3 import resource
 from boto3.dynamodb.conditions import Key,Attr
