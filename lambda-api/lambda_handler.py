@@ -7,18 +7,18 @@ import datetime
 
 dynamodb_resource = resource('dynamodb')
 dynamodb = boto3.resource('dynamodb')
-dynamo_table = dynamodb.Table('Db_details')
-table = dynamodb_resource.Table('Db_details')
+dynamo_table = dynamodb.Table('rds_data_table')
+table = dynamodb_resource.Table('rds_data_table')
 
 def lambda_handler(event, context):
     dbType = event['dbType']
     input_len = len(dbType)
-    if dbType is None:
+    if input_len < 0:
         resp = table.get_item(Key={type: ""})
         items = resp['Items']
     else:
         resp = dynamo_table.scan(FilterExpression=
-        Attr('type').eq(dbType))
+        Attr('DBtype').eq(dbType))
         items = resp['Items'] 
 
     return items
