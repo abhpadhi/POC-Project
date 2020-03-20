@@ -1,4 +1,4 @@
-#AWS RDS creation 
+#AWS RDS resource creation 
 
 resource "aws_db_instance" "rds-1" {
     name = "Projectdb1"

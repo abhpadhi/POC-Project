@@ -18,7 +18,7 @@ def lambda_handler(event, context):
         items = resp['Items']
     else:
         resp = dynamo_table.scan(FilterExpression=
-        Attr('DBtype').eq(dbType))
+        Attr('DB_type').eq(dbType))
         items = resp['Items'] 
 
     return items
