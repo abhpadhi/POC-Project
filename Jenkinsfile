@@ -25,7 +25,7 @@ pipeline {
         
         stage('terraform init') {
             steps {
-                sh 'sudo -S /mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false'
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan' 
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt'
             }
