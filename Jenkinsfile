@@ -51,7 +51,7 @@ pipeline {
             steps {
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init ${WORKSPACE}/POC-Project'
 		sh 'sudo chown -R jenkins. /var/lib/jenkins/workspace/Pipeline-Terraform'
-		sh '/mnt/dr-scripts/cwh-terraform-dr/terraform apply POC-Project/terraformplan'
+		sh '/mnt/dr-scripts/cwh-terraform-dr/terraform apply -auto-approve'
             }
         }
    }
