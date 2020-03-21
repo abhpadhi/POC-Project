@@ -34,7 +34,7 @@ pipeline {
                 sudo /mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan
                 sudo /mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt
 		'''
-             }
+             #}
 	    }
         }
         
