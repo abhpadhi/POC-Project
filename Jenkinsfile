@@ -3,12 +3,13 @@ pipeline {
 
     stages {
 
-        stage('Terraform started')
+        stage('Terraform started') {
             steps {
                 sh 'echo "Started...."'
                 sh 'echo pwd'
             }
-        
+        }
+	
         stage('git clone') {
             steps {
                 sh 'sudo git clone https://github.com/abhpadhi/POC-Project.git'
