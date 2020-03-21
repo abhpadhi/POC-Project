@@ -24,7 +24,7 @@ pipeline {
        	
         stage('terraform init') {
             steps {
-		script:'''
+		sh script:'''
 		//#dir ('POC-Project') {
 		//#	sh 'echo `pwd`' 
 		#!/bin/bash
