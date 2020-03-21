@@ -47,7 +47,7 @@ pipeline {
 
         stage('Apply') {
             steps {
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform apply /POC-Project/terraformplan'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform apply POC-Project/terraformplan'
             }
         }
    }
