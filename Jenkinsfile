@@ -27,6 +27,7 @@ pipeline {
             steps {
                 //sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false'
 		sh 'cp -pr /project/.terraform `pwd`'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false'
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan' 
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt'
             }
