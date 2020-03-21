@@ -12,7 +12,7 @@ pipeline {
 	
         stage('git clone') {
             steps {
-                sh 'git clone https://github.com/abhpadhi/POC-Project.git'
+                sh 'rm -rf *;git clone https://github.com/abhpadhi/POC-Project.git'
             }
         }
         
