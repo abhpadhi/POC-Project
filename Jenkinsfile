@@ -48,6 +48,7 @@ pipeline {
         stage('Apply') {
             steps {
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform apply POC-Project/terraformplan'
+		sh 'sudo chwon -R jenkins. /var/lib/jenkins/workspace/Pipeline-Terraform'
             }
         }
    }
