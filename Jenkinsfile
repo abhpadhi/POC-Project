@@ -19,7 +19,7 @@ pipeline {
         
         stage('Copy provider') {
             steps {
-                sh 'cp /project/provider.tf'
+                sh 'cp -pr /project/provider.tf `pwd`'
             }
         }
         
