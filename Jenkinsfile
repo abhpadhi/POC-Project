@@ -19,15 +19,15 @@ pipeline {
         
         stage('Copy provider') {
             steps {
-                sh 'cp /project/provider.tf ./jenkins'
+                sh 'cp /project/provider.tf'
             }
         }
         
         stage('terraform init') {
             steps {
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false ./jenkins'
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan ./jenkins' 
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt ./jenkins'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan' 
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt'
             }
         }
         
@@ -49,7 +49,7 @@ pipeline {
 
         stage('Apply') {
             steps {
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform -input=false terraformplan ./jenkins'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform -input=false terraformplan'
             }
         }
     }
