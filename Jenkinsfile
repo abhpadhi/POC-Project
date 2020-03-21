@@ -16,11 +16,11 @@ pipeline {
             }
         }
         
-        stage('Copy provider') {
-            steps {
-                sh 'cp -pr /project/provider.tf `pwd`/POC-Project'
-            }
-        }
+        //stage('Copy provider') {
+        //    steps {
+        //        sh 'cp -pr /project/provider.tf `pwd`/POC-Project'
+        //    }
+        //}
         
         stage('terraform init') {
             steps {
