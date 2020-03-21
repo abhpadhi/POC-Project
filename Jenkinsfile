@@ -24,7 +24,7 @@ pipeline {
         
         stage('terraform init') {
             steps {
-		sh 'cd ${WORKSPACE}/POC-Project'
+		sh "cd ${WORKSPACE}/POC-Project; echo `pwd`"
                 sh 'echo `pwd`'
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init'
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan' 
