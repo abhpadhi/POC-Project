@@ -6,7 +6,7 @@ pipeline {
         stage('Terraform started') {
             steps {
                 sh 'echo "Started...."'
-                sh 'echo pwd'
+                sh 'echo `pwd`'
             }
         }
 	
