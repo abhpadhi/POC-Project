@@ -16,12 +16,6 @@ pipeline {
             }
         }
         
-        //stage('Copy provider') {
-        //    steps {
-        //        sh 'cp -pr /project/provider.tf `pwd`/POC-Project'
-        //    }
-        //}
-       	
         stage('terraform init') {
             steps {
 		sh script:'''
@@ -44,7 +38,7 @@ pipeline {
 	    
 	    steps {
                 script {
-                        def plan = readFile '`pwd`/POC-Project/terraformplan.txt'
+                        def plan = readFile 'POC-Project/terraformplan.txt'
                         input message: "Do you want to apply the plan?",
                             parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                 }
@@ -53,8 +47,7 @@ pipeline {
 
         stage('Apply') {
             steps {
-		sh 'cd ${WORKSPACE}/POC-Project'
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform apply -input=false terraformplan'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform apply /POC-Project/terraformplan'
             }
         }
     }
