@@ -27,8 +27,6 @@ pipeline {
 		dir ('POC-Project') {
 			sh 'echo `pwd`' 
 		}
-		sh "cd ${WORKSPACE}/POC-Project; echo `pwd`"
-                sh 'echo `pwd`'
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init'
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan' 
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt'
