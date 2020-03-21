@@ -28,7 +28,7 @@ pipeline {
 		//#dir ('POC-Project') {
 		//#	sh 'echo `pwd`' 
 		#!/bin/bash
-		cd $WORKSPACE/POC-Project 
+		cd "$WORKSPACE/POC-Project"
 		
                	sudo /mnt/dr-scripts/cwh-terraform-dr/terraform init
                 sudo /mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan
