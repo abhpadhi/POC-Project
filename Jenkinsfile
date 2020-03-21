@@ -24,12 +24,16 @@ pipeline {
        	
         stage('terraform init') {
             steps {
-		dir ('POC-Project') {
-			sh 'echo `pwd`' 
+		script:'''
+		#dir ('POC-Project') {
+		#	sh 'echo `pwd`' 
+		#!/bin/bash
+		cd $WORKSPACE/POC-Project 
 		
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init ./Pipeline-Terraform/POC-Project'
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan' 
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt'
+               	sudo /mnt/dr-scripts/cwh-terraform-dr/terraform init
+                sudo /mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan
+                sudo /mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt
+		'''
              }
 	    }
         }
