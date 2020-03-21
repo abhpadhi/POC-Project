@@ -27,7 +27,7 @@ pipeline {
 		dir ('POC-Project') {
 			sh 'echo `pwd`' 
 		}
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init Pipeline-Terraform/POC-Project'
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan' 
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt'
             }
