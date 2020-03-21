@@ -13,7 +13,6 @@ pipeline {
         stage('git clone') {
             steps {
                 sh 'rm -rf *;git clone https://github.com/abhpadhi/POC-Project.git'
-		sh 'cd POC-Project'
             }
         }
         
@@ -25,8 +24,8 @@ pipeline {
         
         stage('terraform init') {
             steps {
-		sh 'cp -pr /project/.terraform `pwd`/POC-Project'
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false'
+		//sh 'cp -pr /project/.terraform `pwd`/POC-Project'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false `pwd`/POC-Project/'
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out `pwd`/POC-Project/terraformplan `pwd`/POC-Project' 
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color `pwd`/POC-Project/terraformplan > `pwd`/POC-Project/terraformplan.txt'
             }
