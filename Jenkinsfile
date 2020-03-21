@@ -22,7 +22,8 @@ pipeline {
 		#!/bin/bash
 		cd "${WORKSPACE}/POC-Project"
 		mkdir -p ~/.aws
-		sudo cp -pr /root/.aws/* ~/.aws
+		sudo cp -pr /root/.aws/credentials ~/.aws
+		sudo cp -pr /root/.aws/config ~/.aws
 		sudo chown -R  jenkins. ~/.aws
                	sudo /mnt/dr-scripts/cwh-terraform-dr/terraform init
                 sudo /mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan
