@@ -21,9 +21,12 @@ pipeline {
         //        sh 'cp -pr /project/provider.tf `pwd`/POC-Project'
         //    }
         //}
-        
+       	
         stage('terraform init') {
             steps {
+		dir ('POC-Project') {
+			sh 'echo `pwd`' 
+		}
 		sh "cd ${WORKSPACE}/POC-Project; echo `pwd`"
                 sh 'echo `pwd`'
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init'
