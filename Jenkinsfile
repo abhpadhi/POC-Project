@@ -19,13 +19,14 @@ pipeline {
         
         stage('Copy provider') {
             steps {
-                sh 'cp -pr /project/provider.tf `pwd`'
+                sh 'cp -pr /project/provider.tf `pwd/POC-Project`'
             }
         }
         
         stage('terraform init') {
             steps {
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false -from-module=/project/.terraform'
+		sh 'cp -pr /project/.terraform `pwd`/POC-Project'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false'
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan' 
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt'
             }
