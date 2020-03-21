@@ -50,10 +50,10 @@ pipeline {
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform apply /POC-Project/terraformplan'
             }
         }
-	post { 
-          always { 
-             cleanWs()
-        }
-      }
-    }
+   }
+		post { 
+          		always { 
+             			cleanWs()
+        		}
+      		}
 }
