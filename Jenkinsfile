@@ -24,10 +24,9 @@ pipeline {
         
         stage('terraform init') {
             steps {
-		//sh 'cp -pr /project/.terraform `pwd`/POC-Project'
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false `pwd`/POC-Project/'
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out `pwd`/POC-Project/terraformplan `pwd`/POC-Project' 
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color `pwd`/POC-Project/terraformplan > `pwd`/POC-Project/terraformplan.txt'
+                sh '/app/terraform/terraform init -input=false `pwd`/POC-Project/'
+                sh '/app/terraform/terraform plan -input=false -out `pwd`/POC-Project/terraformplan `pwd`/POC-Project' 
+                sh '/app/terraform/terraform show -no-color `pwd`/POC-Project/terraformplan > `pwd`/POC-Project/terraformplan.txt'
             }
         }
         
@@ -49,7 +48,7 @@ pipeline {
 
         stage('Apply') {
             steps {
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform apply -input=false `pwd`/POC-Project/terraformplan'
+                sh '/app/terraform/terraform apply -input=false `pwd`/POC-Project/terraformplan'
             }
         }
     }
