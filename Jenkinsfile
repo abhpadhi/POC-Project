@@ -27,8 +27,8 @@ pipeline {
             steps {
 		sh 'cp -pr /project/.terraform `pwd`/POC-Project'
                 sh '/mnt/dr-scripts/cwh-terraform-dr/terraform init -input=false'
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan' 
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out `pwd`/POC-Project/terraformplan `pwd`/POC-Project' 
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color `pwd`/POC-Project/terraformplan > `pwd`/POC-Project/terraformplan.txt'
             }
         }
         
@@ -41,7 +41,7 @@ pipeline {
 	    
 	    steps {
                 script {
-                        def plan = readFile 'terraformplan.txt'
+                        def plan = readFile '`pwd`/POC-Project/terraformplan.txt'
                         input message: "Do you want to apply the plan?",
                             parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                 }
@@ -50,7 +50,7 @@ pipeline {
 
         stage('Apply') {
             steps {
-                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform -input=false terraformplan'
+                sh '/mnt/dr-scripts/cwh-terraform-dr/terraform apply -input=false `pwd`/POC-Project/terraformplan'
             }
         }
     }
