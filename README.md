@@ -1,8 +1,7 @@
 # POC-Project
 
-Assignment-Syncron
 
-This is a submission as part of the interview assignment for Syncron. Here, there is an AWS API gateway available that taken inputs from users for *InstanceType* and fetches AWS RDS instance details *Endpoint and Instance type*.
+Here, there is an AWS API gateway available that taken inputs from users for *InstanceType* and fetches AWS RDS instance details *Endpoint and Instance type*.
 
 Behind the scenes, there are 2 Lambda functions that perform the heavy lifting.
 
@@ -15,7 +14,6 @@ Structure of the terrafrom files
 ```
 ```
 api.tf
-dynamoDB.tf
 Jenkinsfile
 lambda-api
     lambda_handler.py
