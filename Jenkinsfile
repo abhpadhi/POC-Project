@@ -25,9 +25,9 @@ pipeline {
 		sudo cp -pr /root/.aws/credentials ~/.aws
 		sudo cp -pr /root/.aws/config ~/.aws
 		sudo chown -R  jenkins. ~/.aws
-               	sudo /mnt/dr-scripts/cwh-terraform-dr/terraform init
-                sudo /mnt/dr-scripts/cwh-terraform-dr/terraform plan -input=false -out terraformplan
-                sudo /mnt/dr-scripts/cwh-terraform-dr/terraform show -no-color terraformplan > terraformplan.txt
+               	sudo /mnt/cwh-terraform/terraform init
+                sudo /mnt/cwh-terraform/terraform plan -input=false -out terraformplan
+                sudo /mnt/cwh-terraform/terraform show -no-color terraformplan > terraformplan.txt
 		'''
 	    }
         }
@@ -51,7 +51,7 @@ pipeline {
         stage('Apply') {
             steps {
 		sh 'sudo chown -R jenkins. /var/lib/jenkins/workspace/Pipeline-Terraform'
-		sh 'cd POC-Project/; sudo /mnt/dr-scripts/cwh-terraform-dr/terraform apply -auto-approve'
+		sh 'cd POC-Project/; sudo /mnt/cwh-terraform/terraform apply -auto-approve'
             }
         }
    }
